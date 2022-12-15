@@ -35,6 +35,9 @@
         <hutool.version>5.8.10</hutool.version>
         <pinyin4j.version>2.5.1</pinyin4j.version>
         <ooxml.version>1.4</ooxml.version>
+        <!-- SMS 配置 -->
+        <aliyun.sms.version>2.0.22</aliyun.sms.version>
+        <tencent.sms.version>3.1.635</tencent.sms.version>
     </properties>
 	
     <!-- 依赖声明 -->
@@ -162,7 +165,19 @@
                 <artifactId>pinyin4j</artifactId>
                 <version>${pinyin4j.version}</version>
             </dependency>
+            <!--阿里云短信依赖配置-->
+            <dependency>
+                <groupId>com.aliyun</groupId>
+                <artifactId>dysmsapi20170525</artifactId>
+                <version>${aliyun.sms.version}</version>
+            </dependency>
 
+            <!--腾讯云短信依赖配置-->
+            <dependency>
+                <groupId>com.tencentcloudapi</groupId>
+                <artifactId>tencentcloud-sdk-java-sms</artifactId>
+                <version>${tencent.sms.version}</version>
+            </dependency>
 
             <dependency>
                 <groupId>org.projectlombok</groupId>
