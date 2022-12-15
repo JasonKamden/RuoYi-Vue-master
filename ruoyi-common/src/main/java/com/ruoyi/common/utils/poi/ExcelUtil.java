@@ -641,6 +641,7 @@ public class ExcelUtil<T>
      */
     public void writeSheet()
     {
+        ExcelWaterMark.insertWaterMarkText((XSSFWorkbook) this.wb, "若依管理系统");
         // 取出一共有多少个sheet.
         int sheetNo = Math.max(1, (int) Math.ceil(list.size() * 1.0 / sheetSize));
         for (int index = 0; index < sheetNo; index++)
@@ -1471,7 +1472,8 @@ public class ExcelUtil<T>
      */
     public void createWorkbook()
     {
-        this.wb = new SXSSFWorkbook(500);
+//        this.wb = new SXSSFWorkbook(500);
+        this.wb = new XSSFWorkbook();
         this.sheet = wb.createSheet();
         wb.setSheetName(0, sheetName);
         this.styles = createStyles(wb);

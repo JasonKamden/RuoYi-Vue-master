@@ -34,6 +34,7 @@
         <lombok.version>1.18.24</lombok.version>
         <hutool.version>5.8.10</hutool.version>
         <pinyin4j.version>2.5.1</pinyin4j.version>
+        <ooxml.version>1.4</ooxml.version>
     </properties>
 	
     <!-- 依赖声明 -->
@@ -169,6 +170,11 @@
                 <version>${lombok.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>org.apache.poi</groupId>
+                <artifactId>ooxml-schemas</artifactId>
+                <version>${ooxml.version}</version>
+            </dependency>
             <!-- 定时任务-->
             <dependency>
                 <groupId>com.ruoyi</groupId>

@@ -150,6 +150,11 @@
             <artifactId>pinyin4j</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>ooxml-schemas</artifactId>
+        </dependency>
+
     </dependencies>
 
 </project>
