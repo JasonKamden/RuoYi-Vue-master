@@ -35,17 +35,18 @@
             <artifactId>druid-spring-boot-starter</artifactId>
         </dependency>
 
-<!--        &lt;!&ndash; 验证码 &ndash;&gt;-->
-<!--        <dependency>-->
-<!--            <groupId>pro.fessional</groupId>-->
-<!--            <artifactId>kaptcha</artifactId>-->
-<!--            <exclusions>-->
-<!--                <exclusion>-->
-<!--                    <artifactId>javax.servlet-api</artifactId>-->
-<!--                    <groupId>javax.servlet</groupId>-->
-<!--                </exclusion>-->
-<!--            </exclusions>-->
-<!--        </dependency>-->
+        <!-- 验证码 -->
+        <!-- 原有的验证码kaptcha依赖不需要可以删除  -->
+        <!--<dependency>-->
+        <!--    <groupId>pro.fessional</groupId>-->
+        <!--    <artifactId>kaptcha</artifactId>-->
+        <!--    <exclusions>-->
+        <!--        <exclusion>-->
+        <!--            <artifactId>javax.servlet-api</artifactId>-->
+        <!--            <groupId>javax.servlet</groupId>-->
+        <!--        </exclusion>-->
+        <!--    </exclusions>-->
+        <!--</dependency>-->
 
         <!-- 滑块验证码  -->
         <dependency>
@@ -54,7 +55,13 @@
             <version>1.2.7</version>
         </dependency>
 
-        <!-- 原有的验证码kaptcha依赖不需要可以删除  -->
+        <!--mybatis-plus依赖配置-->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+        </dependency>
+
+
 
 
         <!-- 获取系统信息 -->
