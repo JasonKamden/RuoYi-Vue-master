@@ -1,4 +1,4 @@
-package com.ruoyi.common.core.domain;
+package com.ruoyi.sms.entity;
 
 import lombok.Builder;
 import lombok.Data;

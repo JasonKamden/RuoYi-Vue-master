@@ -1,9 +1,9 @@
 package com.ruoyi.web.controller.system;
 
-import com.ruoyi.common.config.properties.SmsProperties;
 import com.ruoyi.common.core.domain.R;
-import com.ruoyi.common.core.sms.SmsTemplate;
 import com.ruoyi.common.utils.spring.SpringUtils;
+import com.ruoyi.sms.config.properties.SmsProperties;
+import com.ruoyi.sms.core.SmsTemplate;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;

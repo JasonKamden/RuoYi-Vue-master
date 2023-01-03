@@ -1,20 +1,21 @@
-package com.ruoyi.common.core.sms;
+package com.ruoyi.sms.core;
+
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.ArrayUtil;
-import com.ruoyi.common.config.properties.SmsProperties;
-import com.ruoyi.common.core.domain.SmsResult;
-import com.ruoyi.common.exception.SmsException;
-import com.ruoyi.common.utils.JsonUtils;
 import com.ruoyi.common.utils.StringUtils;
 import com.tencentcloudapi.common.Credential;
+import com.ruoyi.common.utils.JsonUtils;
+import com.ruoyi.sms.config.properties.SmsProperties;
+import com.ruoyi.sms.entity.SmsResult;
+import com.ruoyi.sms.exception.SmsException;
 import com.tencentcloudapi.common.profile.ClientProfile;
 import com.tencentcloudapi.common.profile.HttpProfile;
 import com.tencentcloudapi.sms.v20190711.SmsClient;
-import com.tencentcloudapi.sms.v20190711.models.SendSmsRequest;
 import com.tencentcloudapi.sms.v20190711.models.SendSmsResponse;
-import com.tencentcloudapi.sms.v20190711.models.SendStatus;
 import lombok.SneakyThrows;
+import com.tencentcloudapi.sms.v20190711.models.SendSmsRequest;
+import com.tencentcloudapi.sms.v20190711.models.SendStatus;
 
 import java.util.Arrays;
 import java.util.Map;

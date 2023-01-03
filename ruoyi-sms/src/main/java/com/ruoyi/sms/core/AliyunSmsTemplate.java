@@ -1,14 +1,14 @@
-package com.ruoyi.common.core.sms;
+package com.ruoyi.sms.core;
 
 import com.aliyun.dysmsapi20170525.Client;
 import com.aliyun.dysmsapi20170525.models.SendSmsRequest;
 import com.aliyun.dysmsapi20170525.models.SendSmsResponse;
 import com.aliyun.teaopenapi.models.Config;
-import com.ruoyi.common.config.properties.SmsProperties;
-import com.ruoyi.common.core.domain.SmsResult;
-import com.ruoyi.common.exception.SmsException;
 import com.ruoyi.common.utils.JsonUtils;
 import com.ruoyi.common.utils.StringUtils;
+import com.ruoyi.sms.config.properties.SmsProperties;
+import com.ruoyi.sms.entity.SmsResult;
+import com.ruoyi.sms.exception.SmsException;
 import lombok.SneakyThrows;
 
 import java.util.Map;

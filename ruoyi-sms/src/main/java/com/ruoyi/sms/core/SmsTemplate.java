@@ -1,7 +1,9 @@
-package com.ruoyi.common.core.sms;
+package com.ruoyi.sms.core;
 
 
-import com.ruoyi.common.core.domain.SmsResult;
+
+
+import com.ruoyi.sms.entity.SmsResult;
 
 import java.util.Map;
 

@@ -1,10 +1,10 @@
-package com.ruoyi.common.config;
+package com.ruoyi.sms.config;
 
 
-import com.ruoyi.common.config.properties.SmsProperties;
-import com.ruoyi.common.core.sms.AliyunSmsTemplate;
-import com.ruoyi.common.core.sms.SmsTemplate;
-import com.ruoyi.common.core.sms.TencentSmsTemplate;
+import com.ruoyi.sms.config.properties.SmsProperties;
+import com.ruoyi.sms.core.AliyunSmsTemplate;
+import com.ruoyi.sms.core.SmsTemplate;
+import com.ruoyi.sms.core.TencentSmsTemplate;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;

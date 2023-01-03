@@ -1,4 +1,4 @@
-package com.ruoyi.common.exception;
+package com.ruoyi.sms.exception;
 
 /**
  * Sms异常类
