@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.SysTaskManageMapper">
+    
+    <resultMap type="SysTaskManage" id="SysTaskManageResult">
+        <result property="taskId"    column="task_id"    />
+        <result property="taskName"    column="task_name"    />
+        <result property="taskContent"    column="task_content"    />
+        <result property="taskType"    column="task_type"    />
+        <result property="beginTime"    column="begin_time"    />
+        <result property="endTime"    column="end_time"    />
+        <result property="status"    column="status"    />
+        <result property="duration"    column="duration"    />
+        <result property="supervisorAccountId"    column="supervisor_account_id"    />
+        <result property="participantAccountId"    column="participant_account_id"    />
+        <result property="chargeAccountId"    column="charge_account_id"    />
+        <result property="taskLevel"    column="task_level"    />
+        <result property="fileAttach"    column="file_attach"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectSysTaskManageVo">
+        select task_id, task_name, task_content, task_type, begin_time, end_time, status, duration, supervisor_account_id, participant_account_id, charge_account_id, task_level, file_attach, create_by, create_time, update_by, update_time, remark from sys_task_manage
+    </sql>
+
+    <select id="selectSysTaskManageList" parameterType="SysTaskManage" resultMap="SysTaskManageResult">
+        <include refid="selectSysTaskManageVo"/>
+        <where>  
+            <if test="taskName != null  and taskName != ''"> and task_name like concat('%', #{taskName}, '%')</if>
+            <if test="taskContent != null  and taskContent != ''"> and task_content = #{taskContent}</if>
+            <if test="taskType != null  and taskType != ''"> and task_type = #{taskType}</if>
+            <if test="beginTime != null "> and begin_time = #{beginTime}</if>
+            <if test="endTime != null "> and end_time = #{endTime}</if>
+            <if test="status != null  and status != ''"> and status = #{status}</if>
+            <if test="duration != null "> and duration = #{duration}</if>
+            <if test="supervisorAccountId != null "> and supervisor_account_id = #{supervisorAccountId}</if>
+            <if test="participantAccountId != null  and participantAccountId != ''"> and participant_account_id = #{participantAccountId}</if>
+            <if test="chargeAccountId != null "> and charge_account_id = #{chargeAccountId}</if>
+            <if test="taskLevel != null  and taskLevel != ''"> and task_level = #{taskLevel}</if>
+            <if test="fileAttach != null  and fileAttach != ''"> and file_attach = #{fileAttach}</if>
+        </where>
+    </select>
+    
+    <select id="selectSysTaskManageByTaskId" parameterType="String" resultMap="SysTaskManageResult">
+        <include refid="selectSysTaskManageVo"/>
+        where task_id = #{taskId}
+    </select>
+        
+    <insert id="insertSysTaskManage" parameterType="SysTaskManage">
+        insert into sys_task_manage
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="taskId != null">task_id,</if>
+            <if test="taskName != null">task_name,</if>
+            <if test="taskContent != null">task_content,</if>
+            <if test="taskType != null">task_type,</if>
+            <if test="beginTime != null">begin_time,</if>
+            <if test="endTime != null">end_time,</if>
+            <if test="status != null">status,</if>
+            <if test="duration != null">duration,</if>
+            <if test="supervisorAccountId != null">supervisor_account_id,</if>
+            <if test="participantAccountId != null">participant_account_id,</if>
+            <if test="chargeAccountId != null">charge_account_id,</if>
+            <if test="taskLevel != null">task_level,</if>
+            <if test="fileAttach != null">file_attach,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="taskId != null">#{taskId},</if>
+            <if test="taskName != null">#{taskName},</if>
+            <if test="taskContent != null">#{taskContent},</if>
+            <if test="taskType != null">#{taskType},</if>
+            <if test="beginTime != null">#{beginTime},</if>
+            <if test="endTime != null">#{endTime},</if>
+            <if test="status != null">#{status},</if>
+            <if test="duration != null">#{duration},</if>
+            <if test="supervisorAccountId != null">#{supervisorAccountId},</if>
+            <if test="participantAccountId != null">#{participantAccountId},</if>
+            <if test="chargeAccountId != null">#{chargeAccountId},</if>
+            <if test="taskLevel != null">#{taskLevel},</if>
+            <if test="fileAttach != null">#{fileAttach},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateSysTaskManage" parameterType="SysTaskManage">
+        update sys_task_manage
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="taskName != null">task_name = #{taskName},</if>
+            <if test="taskContent != null">task_content = #{taskContent},</if>
+            <if test="taskType != null">task_type = #{taskType},</if>
+            <if test="beginTime != null">begin_time = #{beginTime},</if>
+            <if test="endTime != null">end_time = #{endTime},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="duration != null">duration = #{duration},</if>
+            <if test="supervisorAccountId != null">supervisor_account_id = #{supervisorAccountId},</if>
+            <if test="participantAccountId != null">participant_account_id = #{participantAccountId},</if>
+            <if test="chargeAccountId != null">charge_account_id = #{chargeAccountId},</if>
+            <if test="taskLevel != null">task_level = #{taskLevel},</if>
+            <if test="fileAttach != null">file_attach = #{fileAttach},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where task_id = #{taskId}
+    </update>
+
+    <delete id="deleteSysTaskManageByTaskId" parameterType="String">
+        delete from sys_task_manage where task_id = #{taskId}
+    </delete>
+
+    <delete id="deleteSysTaskManageByTaskIds" parameterType="String">
+        delete from sys_task_manage where task_id in 
+        <foreach item="taskId" collection="array" open="(" separator="," close=")">
+            #{taskId}
+        </foreach>
+    </delete>
+</mapper>
