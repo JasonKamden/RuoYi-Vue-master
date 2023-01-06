@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.SysMeetingApplyMapper">
+    
+    <resultMap type="SysMeetingApply" id="SysMeetingApplyResult">
+        <result property="meetingId"    column="meeting_id"    />
+        <result property="roomId"    column="room_id"    />
+        <result property="useCapacity"    column="use_capacity"    />
+        <result property="subject"    column="subject"    />
+        <result property="beginTime"    column="begin_time"    />
+        <result property="endTime"    column="end_time"    />
+        <result property="meetingType"    column="meeting_type"    />
+        <result property="chairUserName"    column="chair_user_name"    />
+        <result property="chairUserPhone"    column="chair_user_phone"    />
+        <result property="status"    column="status"    />
+        <result property="mailStatus"    column="mail_status"    />
+        <result property="fileAttach"    column="file_attach"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectSysMeetingApplyVo">
+        select meeting_id, room_id, use_capacity, subject, begin_time, end_time, meeting_type, chair_user_name, chair_user_phone, status, mail_status, file_attach, create_by, create_time, update_by, update_time, remark from sys_meeting_apply
+    </sql>
+
+    <select id="selectSysMeetingApplyList" parameterType="SysMeetingApply" resultMap="SysMeetingApplyResult">
+        <include refid="selectSysMeetingApplyVo"/>
+        <where>  
+            <if test="roomId != null  and roomId != ''"> and room_id = #{roomId}</if>
+            <if test="useCapacity != null "> and use_capacity = #{useCapacity}</if>
+            <if test="subject != null  and subject != ''"> and subject = #{subject}</if>
+            <if test="beginTime != null "> and begin_time = #{beginTime}</if>
+            <if test="endTime != null "> and end_time = #{endTime}</if>
+            <if test="meetingType != null  and meetingType != ''"> and meeting_type = #{meetingType}</if>
+            <if test="chairUserName != null  and chairUserName != ''"> and chair_user_name like concat('%', #{chairUserName}, '%')</if>
+            <if test="chairUserPhone != null  and chairUserPhone != ''"> and chair_user_phone = #{chairUserPhone}</if>
+            <if test="status != null  and status != ''"> and status = #{status}</if>
+            <if test="mailStatus != null  and mailStatus != ''"> and mail_status = #{mailStatus}</if>
+            <if test="fileAttach != null  and fileAttach != ''"> and file_attach = #{fileAttach}</if>
+        </where>
+    </select>
+    
+    <select id="selectSysMeetingApplyByMeetingId" parameterType="String" resultMap="SysMeetingApplyResult">
+        <include refid="selectSysMeetingApplyVo"/>
+        where meeting_id = #{meetingId}
+    </select>
+        
+    <insert id="insertSysMeetingApply" parameterType="SysMeetingApply">
+        insert into sys_meeting_apply
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="meetingId != null">meeting_id,</if>
+            <if test="roomId != null and roomId != ''">room_id,</if>
+            <if test="useCapacity != null">use_capacity,</if>
+            <if test="subject != null">subject,</if>
+            <if test="beginTime != null">begin_time,</if>
+            <if test="endTime != null">end_time,</if>
+            <if test="meetingType != null">meeting_type,</if>
+            <if test="chairUserName != null">chair_user_name,</if>
+            <if test="chairUserPhone != null">chair_user_phone,</if>
+            <if test="status != null">status,</if>
+            <if test="mailStatus != null">mail_status,</if>
+            <if test="fileAttach != null">file_attach,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="meetingId != null">#{meetingId},</if>
+            <if test="roomId != null and roomId != ''">#{roomId},</if>
+            <if test="useCapacity != null">#{useCapacity},</if>
+            <if test="subject != null">#{subject},</if>
+            <if test="beginTime != null">#{beginTime},</if>
+            <if test="endTime != null">#{endTime},</if>
+            <if test="meetingType != null">#{meetingType},</if>
+            <if test="chairUserName != null">#{chairUserName},</if>
+            <if test="chairUserPhone != null">#{chairUserPhone},</if>
+            <if test="status != null">#{status},</if>
+            <if test="mailStatus != null">#{mailStatus},</if>
+            <if test="fileAttach != null">#{fileAttach},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateSysMeetingApply" parameterType="SysMeetingApply">
+        update sys_meeting_apply
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="roomId != null and roomId != ''">room_id = #{roomId},</if>
+            <if test="useCapacity != null">use_capacity = #{useCapacity},</if>
+            <if test="subject != null">subject = #{subject},</if>
+            <if test="beginTime != null">begin_time = #{beginTime},</if>
+            <if test="endTime != null">end_time = #{endTime},</if>
+            <if test="meetingType != null">meeting_type = #{meetingType},</if>
+            <if test="chairUserName != null">chair_user_name = #{chairUserName},</if>
+            <if test="chairUserPhone != null">chair_user_phone = #{chairUserPhone},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="mailStatus != null">mail_status = #{mailStatus},</if>
+            <if test="fileAttach != null">file_attach = #{fileAttach},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where meeting_id = #{meetingId}
+    </update>
+
+    <delete id="deleteSysMeetingApplyByMeetingId" parameterType="String">
+        delete from sys_meeting_apply where meeting_id = #{meetingId}
+    </delete>
+
+    <delete id="deleteSysMeetingApplyByMeetingIds" parameterType="String">
+        delete from sys_meeting_apply where meeting_id in 
+        <foreach item="meetingId" collection="array" open="(" separator="," close=")">
+            #{meetingId}
+        </foreach>
+    </delete>
+</mapper>
