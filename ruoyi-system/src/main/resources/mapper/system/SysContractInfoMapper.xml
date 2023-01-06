@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.SysContractInfoMapper">
+    
+    <resultMap type="SysContractInfo" id="SysContractInfoResult">
+        <result property="infoId"    column="info_id"    />
+        <result property="contractId"    column="contract_id"    />
+        <result property="firstName"    column="first_name"    />
+        <result property="secondName"    column="second_name"    />
+        <result property="firstAddr"    column="first_addr"    />
+        <result property="secondAddr"    column="second_addr"    />
+        <result property="firstLegalPerson"    column="first_legal_person"    />
+        <result property="secondLegalPerson"    column="second_legal_person"    />
+        <result property="firstSignUser"    column="first_sign_user"    />
+        <result property="secondSignUser"    column="second_sign_user"    />
+        <result property="firstMobile"    column="first_mobile"    />
+        <result property="secondMobile"    column="second_mobile"    />
+        <result property="firstBank"    column="first_bank"    />
+        <result property="secondBank"    column="second_bank"    />
+        <result property="firstBankAccount"    column="first_bank_account"    />
+        <result property="secondBankAccount"    column="second_bank_account"    />
+        <result property="firstTaxNo"    column="first_tax_no"    />
+        <result property="secondTaxNo"    column="second_tax_no"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <resultMap id="SysContractInfoSysContractResult" type="SysContractInfo" extends="SysContractInfoResult">
+        <collection property="sysContractList" notNullColumn="sub_contract_id" javaType="java.util.List" resultMap="SysContractResult" />
+    </resultMap>
+
+    <resultMap type="SysContract" id="SysContractResult">
+        <result property="contractId"    column="sub_contract_id"    />
+        <result property="title"    column="sub_title"    />
+        <result property="contractCode"    column="sub_contract_code"    />
+        <result property="contractType"    column="sub_contract_type"    />
+        <result property="startTime"    column="sub_start_time"    />
+        <result property="endTime"    column="sub_end_time"    />
+        <result property="signTime"    column="sub_sign_time"    />
+        <result property="payType"    column="sub_pay_type"    />
+        <result property="cashType"    column="sub_cash_type"    />
+        <result property="total"    column="sub_total"    />
+        <result property="realTotal"    column="sub_real_total"    />
+        <result property="isFirst"    column="sub_is_first"    />
+        <result property="signAddr"    column="sub_sign_addr"    />
+        <result property="status"    column="sub_status"    />
+        <result property="contenxt"    column="sub_contenxt"    />
+        <result property="fileAttach"    column="sub_file_attach"    />
+    </resultMap>
+
+    <sql id="selectSysContractInfoVo">
+        select info_id, contract_id, first_name, second_name, first_addr, second_addr, first_legal_person, second_legal_person, first_sign_user, second_sign_user, first_mobile, second_mobile, first_bank, second_bank, first_bank_account, second_bank_account, first_tax_no, second_tax_no, create_by, create_time, update_by, update_time, remark from sys_contract_info
+    </sql>
+
+    <select id="selectSysContractInfoList" parameterType="SysContractInfo" resultMap="SysContractInfoResult">
+        <include refid="selectSysContractInfoVo"/>
+        <where>  
+            <if test="contractId != null  and contractId != ''"> and contract_id = #{contractId}</if>
+            <if test="firstName != null  and firstName != ''"> and first_name like concat('%', #{firstName}, '%')</if>
+            <if test="secondName != null  and secondName != ''"> and second_name like concat('%', #{secondName}, '%')</if>
+            <if test="firstAddr != null  and firstAddr != ''"> and first_addr = #{firstAddr}</if>
+            <if test="secondAddr != null  and secondAddr != ''"> and second_addr = #{secondAddr}</if>
+            <if test="firstLegalPerson != null  and firstLegalPerson != ''"> and first_legal_person = #{firstLegalPerson}</if>
+            <if test="secondLegalPerson != null  and secondLegalPerson != ''"> and second_legal_person = #{secondLegalPerson}</if>
+            <if test="firstSignUser != null  and firstSignUser != ''"> and first_sign_user = #{firstSignUser}</if>
+            <if test="secondSignUser != null  and secondSignUser != ''"> and second_sign_user = #{secondSignUser}</if>
+            <if test="firstMobile != null "> and first_mobile = #{firstMobile}</if>
+            <if test="secondMobile != null "> and second_mobile = #{secondMobile}</if>
+            <if test="firstBank != null  and firstBank != ''"> and first_bank = #{firstBank}</if>
+            <if test="secondBank != null  and secondBank != ''"> and second_bank = #{secondBank}</if>
+            <if test="firstBankAccount != null  and firstBankAccount != ''"> and first_bank_account = #{firstBankAccount}</if>
+            <if test="secondBankAccount != null  and secondBankAccount != ''"> and second_bank_account = #{secondBankAccount}</if>
+            <if test="firstTaxNo != null  and firstTaxNo != ''"> and first_tax_no = #{firstTaxNo}</if>
+            <if test="secondTaxNo != null  and secondTaxNo != ''"> and second_tax_no = #{secondTaxNo}</if>
+        </where>
+    </select>
+    
+    <select id="selectSysContractInfoByInfoId" parameterType="String" resultMap="SysContractInfoSysContractResult">
+        select a.info_id, a.contract_id, a.first_name, a.second_name, a.first_addr, a.second_addr, a.first_legal_person, a.second_legal_person, a.first_sign_user, a.second_sign_user, a.first_mobile, a.second_mobile, a.first_bank, a.second_bank, a.first_bank_account, a.second_bank_account, a.first_tax_no, a.second_tax_no, a.create_by, a.create_time, a.update_by, a.update_time, a.remark,
+ b.contract_id as sub_contract_id, b.title as sub_title, b.contract_code as sub_contract_code, b.contract_type as sub_contract_type, b.start_time as sub_start_time, b.end_time as sub_end_time, b.sign_time as sub_sign_time, b.pay_type as sub_pay_type, b.cash_type as sub_cash_type, b.total as sub_total, b.real_total as sub_real_total, b.is_first as sub_is_first, b.sign_addr as sub_sign_addr, b.status as sub_status, b.contenxt as sub_contenxt, b.file_attach as sub_file_attach
+        from sys_contract_info a
+        left join sys_contract b on b.contract_id = a.info_id
+        where a.info_id = #{infoId}
+    </select>
+        
+    <insert id="insertSysContractInfo" parameterType="SysContractInfo">
+        insert into sys_contract_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="infoId != null">info_id,</if>
+            <if test="contractId != null and contractId != ''">contract_id,</if>
+            <if test="firstName != null">first_name,</if>
+            <if test="secondName != null">second_name,</if>
+            <if test="firstAddr != null">first_addr,</if>
+            <if test="secondAddr != null">second_addr,</if>
+            <if test="firstLegalPerson != null">first_legal_person,</if>
+            <if test="secondLegalPerson != null">second_legal_person,</if>
+            <if test="firstSignUser != null">first_sign_user,</if>
+            <if test="secondSignUser != null">second_sign_user,</if>
+            <if test="firstMobile != null">first_mobile,</if>
+            <if test="secondMobile != null">second_mobile,</if>
+            <if test="firstBank != null">first_bank,</if>
+            <if test="secondBank != null">second_bank,</if>
+            <if test="firstBankAccount != null">first_bank_account,</if>
+            <if test="secondBankAccount != null">second_bank_account,</if>
+            <if test="firstTaxNo != null">first_tax_no,</if>
+            <if test="secondTaxNo != null">second_tax_no,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="infoId != null">#{infoId},</if>
+            <if test="contractId != null and contractId != ''">#{contractId},</if>
+            <if test="firstName != null">#{firstName},</if>
+            <if test="secondName != null">#{secondName},</if>
+            <if test="firstAddr != null">#{firstAddr},</if>
+            <if test="secondAddr != null">#{secondAddr},</if>
+            <if test="firstLegalPerson != null">#{firstLegalPerson},</if>
+            <if test="secondLegalPerson != null">#{secondLegalPerson},</if>
+            <if test="firstSignUser != null">#{firstSignUser},</if>
+            <if test="secondSignUser != null">#{secondSignUser},</if>
+            <if test="firstMobile != null">#{firstMobile},</if>
+            <if test="secondMobile != null">#{secondMobile},</if>
+            <if test="firstBank != null">#{firstBank},</if>
+            <if test="secondBank != null">#{secondBank},</if>
+            <if test="firstBankAccount != null">#{firstBankAccount},</if>
+            <if test="secondBankAccount != null">#{secondBankAccount},</if>
+            <if test="firstTaxNo != null">#{firstTaxNo},</if>
+            <if test="secondTaxNo != null">#{secondTaxNo},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateSysContractInfo" parameterType="SysContractInfo">
+        update sys_contract_info
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="contractId != null and contractId != ''">contract_id = #{contractId},</if>
+            <if test="firstName != null">first_name = #{firstName},</if>
+            <if test="secondName != null">second_name = #{secondName},</if>
+            <if test="firstAddr != null">first_addr = #{firstAddr},</if>
+            <if test="secondAddr != null">second_addr = #{secondAddr},</if>
+            <if test="firstLegalPerson != null">first_legal_person = #{firstLegalPerson},</if>
+            <if test="secondLegalPerson != null">second_legal_person = #{secondLegalPerson},</if>
+            <if test="firstSignUser != null">first_sign_user = #{firstSignUser},</if>
+            <if test="secondSignUser != null">second_sign_user = #{secondSignUser},</if>
+            <if test="firstMobile != null">first_mobile = #{firstMobile},</if>
+            <if test="secondMobile != null">second_mobile = #{secondMobile},</if>
+            <if test="firstBank != null">first_bank = #{firstBank},</if>
+            <if test="secondBank != null">second_bank = #{secondBank},</if>
+            <if test="firstBankAccount != null">first_bank_account = #{firstBankAccount},</if>
+            <if test="secondBankAccount != null">second_bank_account = #{secondBankAccount},</if>
+            <if test="firstTaxNo != null">first_tax_no = #{firstTaxNo},</if>
+            <if test="secondTaxNo != null">second_tax_no = #{secondTaxNo},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where info_id = #{infoId}
+    </update>
+
+    <delete id="deleteSysContractInfoByInfoId" parameterType="String">
+        delete from sys_contract_info where info_id = #{infoId}
+    </delete>
+
+    <delete id="deleteSysContractInfoByInfoIds" parameterType="String">
+        delete from sys_contract_info where info_id in 
+        <foreach item="infoId" collection="array" open="(" separator="," close=")">
+            #{infoId}
+        </foreach>
+    </delete>
+    
+    <delete id="deleteSysContractByContractIds" parameterType="String">
+        delete from sys_contract where contract_id in 
+        <foreach item="contractId" collection="array" open="(" separator="," close=")">
+            #{contractId}
+        </foreach>
+    </delete>
+
+    <delete id="deleteSysContractByContractId" parameterType="String">
+        delete from sys_contract where contract_id = #{contractId}
+    </delete>
+
+    <insert id="batchSysContract">
+        insert into sys_contract( contract_id, title, contract_code, contract_type, start_time, end_time, sign_time, pay_type, cash_type, total, real_total, is_first, sign_addr, status, contenxt, file_attach) values
+		<foreach item="item" index="index" collection="list" separator=",">
+            ( #{item.contractId}, #{item.title}, #{item.contractCode}, #{item.contractType}, #{item.startTime}, #{item.endTime}, #{item.signTime}, #{item.payType}, #{item.cashType}, #{item.total}, #{item.realTotal}, #{item.isFirst}, #{item.signAddr}, #{item.status}, #{item.contenxt}, #{item.fileAttach})
+        </foreach>
+    </insert>
+</mapper>
