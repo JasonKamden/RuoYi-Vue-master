@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.SysBigstoryInfoMapper">
+    
+    <resultMap type="SysBigstoryInfo" id="SysBigstoryInfoResult">
+        <result property="attachId"    column="attach_id"    />
+        <result property="title"    column="title"    />
+        <result property="happenTime"    column="happen_time"    />
+        <result property="type"    column="type"    />
+        <result property="context"    column="context"    />
+        <result property="mainPicture"    column="main_picture"    />
+        <result property="attachFile"    column="attach_file"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectSysBigstoryInfoVo">
+        select attach_id, title, happen_time, type, context, main_picture, attach_file, create_by, create_time, update_by, update_time, remark from sys_bigstory_info
+    </sql>
+
+    <select id="selectSysBigstoryInfoList" parameterType="SysBigstoryInfo" resultMap="SysBigstoryInfoResult">
+        <include refid="selectSysBigstoryInfoVo"/>
+        <where>  
+            <if test="title != null  and title != ''"> and title = #{title}</if>
+            <if test="happenTime != null "> and happen_time = #{happenTime}</if>
+            <if test="type != null  and type != ''"> and type = #{type}</if>
+            <if test="context != null  and context != ''"> and context = #{context}</if>
+            <if test="mainPicture != null  and mainPicture != ''"> and main_picture = #{mainPicture}</if>
+            <if test="attachFile != null  and attachFile != ''"> and attach_file = #{attachFile}</if>
+        </where>
+    </select>
+    
+    <select id="selectSysBigstoryInfoByAttachId" parameterType="String" resultMap="SysBigstoryInfoResult">
+        <include refid="selectSysBigstoryInfoVo"/>
+        where attach_id = #{attachId}
+    </select>
+        
+    <insert id="insertSysBigstoryInfo" parameterType="SysBigstoryInfo">
+        insert into sys_bigstory_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="attachId != null">attach_id,</if>
+            <if test="title != null">title,</if>
+            <if test="happenTime != null">happen_time,</if>
+            <if test="type != null">type,</if>
+            <if test="context != null">context,</if>
+            <if test="mainPicture != null">main_picture,</if>
+            <if test="attachFile != null">attach_file,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="attachId != null">#{attachId},</if>
+            <if test="title != null">#{title},</if>
+            <if test="happenTime != null">#{happenTime},</if>
+            <if test="type != null">#{type},</if>
+            <if test="context != null">#{context},</if>
+            <if test="mainPicture != null">#{mainPicture},</if>
+            <if test="attachFile != null">#{attachFile},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateSysBigstoryInfo" parameterType="SysBigstoryInfo">
+        update sys_bigstory_info
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="title != null">title = #{title},</if>
+            <if test="happenTime != null">happen_time = #{happenTime},</if>
+            <if test="type != null">type = #{type},</if>
+            <if test="context != null">context = #{context},</if>
+            <if test="mainPicture != null">main_picture = #{mainPicture},</if>
+            <if test="attachFile != null">attach_file = #{attachFile},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where attach_id = #{attachId}
+    </update>
+
+    <delete id="deleteSysBigstoryInfoByAttachId" parameterType="String">
+        delete from sys_bigstory_info where attach_id = #{attachId}
+    </delete>
+
+    <delete id="deleteSysBigstoryInfoByAttachIds" parameterType="String">
+        delete from sys_bigstory_info where attach_id in 
+        <foreach item="attachId" collection="array" open="(" separator="," close=")">
+            #{attachId}
+        </foreach>
+    </delete>
+</mapper>
