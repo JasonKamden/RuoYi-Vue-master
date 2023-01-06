@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.SysMeetingNotesMapper">
+    
+    <resultMap type="SysMeetingNotes" id="SysMeetingNotesResult">
+        <result property="notesId"    column="notes_id"    />
+        <result property="meetingId"    column="meeting_id"    />
+        <result property="notesTitle"    column="notes_title"    />
+        <result property="notesUser"    column="notes_user"    />
+        <result property="content"    column="content"    />
+        <result property="notesFile"    column="notes_file"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectSysMeetingNotesVo">
+        select notes_id, meeting_id, notes_title, notes_user, content, notes_file, create_by, create_time, update_by, update_time, remark from sys_meeting_notes
+    </sql>
+
+    <select id="selectSysMeetingNotesList" parameterType="SysMeetingNotes" resultMap="SysMeetingNotesResult">
+        <include refid="selectSysMeetingNotesVo"/>
+        <where>  
+            <if test="meetingId != null  and meetingId != ''"> and meeting_id = #{meetingId}</if>
+            <if test="notesTitle != null  and notesTitle != ''"> and notes_title = #{notesTitle}</if>
+            <if test="notesUser != null  and notesUser != ''"> and notes_user = #{notesUser}</if>
+            <if test="content != null  and content != ''"> and content = #{content}</if>
+            <if test="notesFile != null  and notesFile != ''"> and notes_file = #{notesFile}</if>
+        </where>
+    </select>
+    
+    <select id="selectSysMeetingNotesByNotesId" parameterType="String" resultMap="SysMeetingNotesResult">
+        <include refid="selectSysMeetingNotesVo"/>
+        where notes_id = #{notesId}
+    </select>
+        
+    <insert id="insertSysMeetingNotes" parameterType="SysMeetingNotes">
+        insert into sys_meeting_notes
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="notesId != null">notes_id,</if>
+            <if test="meetingId != null and meetingId != ''">meeting_id,</if>
+            <if test="notesTitle != null">notes_title,</if>
+            <if test="notesUser != null">notes_user,</if>
+            <if test="content != null">content,</if>
+            <if test="notesFile != null">notes_file,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="notesId != null">#{notesId},</if>
+            <if test="meetingId != null and meetingId != ''">#{meetingId},</if>
+            <if test="notesTitle != null">#{notesTitle},</if>
+            <if test="notesUser != null">#{notesUser},</if>
+            <if test="content != null">#{content},</if>
+            <if test="notesFile != null">#{notesFile},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateSysMeetingNotes" parameterType="SysMeetingNotes">
+        update sys_meeting_notes
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="meetingId != null and meetingId != ''">meeting_id = #{meetingId},</if>
+            <if test="notesTitle != null">notes_title = #{notesTitle},</if>
+            <if test="notesUser != null">notes_user = #{notesUser},</if>
+            <if test="content != null">content = #{content},</if>
+            <if test="notesFile != null">notes_file = #{notesFile},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where notes_id = #{notesId}
+    </update>
+
+    <delete id="deleteSysMeetingNotesByNotesId" parameterType="String">
+        delete from sys_meeting_notes where notes_id = #{notesId}
+    </delete>
+
+    <delete id="deleteSysMeetingNotesByNotesIds" parameterType="String">
+        delete from sys_meeting_notes where notes_id in 
+        <foreach item="notesId" collection="array" open="(" separator="," close=")">
+            #{notesId}
+        </foreach>
+    </delete>
+</mapper>
