@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.SysContractMapper">
+    
+    <resultMap type="SysContract" id="SysContractResult">
+        <result property="contractId"    column="contract_id"    />
+        <result property="title"    column="title"    />
+        <result property="contractCode"    column="contract_code"    />
+        <result property="contractType"    column="contract_type"    />
+        <result property="startTime"    column="start_time"    />
+        <result property="endTime"    column="end_time"    />
+        <result property="signTime"    column="sign_time"    />
+        <result property="payType"    column="pay_type"    />
+        <result property="cashType"    column="cash_type"    />
+        <result property="total"    column="total"    />
+        <result property="realTotal"    column="real_total"    />
+        <result property="isFirst"    column="is_first"    />
+        <result property="signAddr"    column="sign_addr"    />
+        <result property="status"    column="status"    />
+        <result property="contenxt"    column="contenxt"    />
+        <result property="fileAttach"    column="file_attach"    />
+    </resultMap>
+
+    <sql id="selectSysContractVo">
+        select contract_id, title, contract_code, contract_type, start_time, end_time, sign_time, pay_type, cash_type, total, real_total, is_first, sign_addr, status, contenxt, file_attach from sys_contract
+    </sql>
+
+    <select id="selectSysContractList" parameterType="SysContract" resultMap="SysContractResult">
+        <include refid="selectSysContractVo"/>
+        <where>  
+            <if test="title != null  and title != ''"> and title = #{title}</if>
+            <if test="contractCode != null  and contractCode != ''"> and contract_code = #{contractCode}</if>
+            <if test="contractType != null  and contractType != ''"> and contract_type = #{contractType}</if>
+            <if test="startTime != null "> and start_time = #{startTime}</if>
+            <if test="endTime != null "> and end_time = #{endTime}</if>
+            <if test="signTime != null "> and sign_time = #{signTime}</if>
+            <if test="payType != null  and payType != ''"> and pay_type = #{payType}</if>
+            <if test="cashType != null  and cashType != ''"> and cash_type = #{cashType}</if>
+            <if test="total != null "> and total = #{total}</if>
+            <if test="realTotal != null "> and real_total = #{realTotal}</if>
+            <if test="isFirst != null  and isFirst != ''"> and is_first = #{isFirst}</if>
+            <if test="signAddr != null  and signAddr != ''"> and sign_addr = #{signAddr}</if>
+            <if test="status != null  and status != ''"> and status = #{status}</if>
+            <if test="contenxt != null  and contenxt != ''"> and contenxt = #{contenxt}</if>
+            <if test="fileAttach != null  and fileAttach != ''"> and file_attach = #{fileAttach}</if>
+        </where>
+    </select>
+    
+    <select id="selectSysContractByContractId" parameterType="String" resultMap="SysContractResult">
+        <include refid="selectSysContractVo"/>
+        where contract_id = #{contractId}
+    </select>
+        
+    <insert id="insertSysContract" parameterType="SysContract">
+        insert into sys_contract
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="contractId != null">contract_id,</if>
+            <if test="title != null">title,</if>
+            <if test="contractCode != null">contract_code,</if>
+            <if test="contractType != null">contract_type,</if>
+            <if test="startTime != null">start_time,</if>
+            <if test="endTime != null">end_time,</if>
+            <if test="signTime != null">sign_time,</if>
+            <if test="payType != null">pay_type,</if>
+            <if test="cashType != null">cash_type,</if>
+            <if test="total != null">total,</if>
+            <if test="realTotal != null">real_total,</if>
+            <if test="isFirst != null">is_first,</if>
+            <if test="signAddr != null">sign_addr,</if>
+            <if test="status != null">status,</if>
+            <if test="contenxt != null">contenxt,</if>
+            <if test="fileAttach != null">file_attach,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="contractId != null">#{contractId},</if>
+            <if test="title != null">#{title},</if>
+            <if test="contractCode != null">#{contractCode},</if>
+            <if test="contractType != null">#{contractType},</if>
+            <if test="startTime != null">#{startTime},</if>
+            <if test="endTime != null">#{endTime},</if>
+            <if test="signTime != null">#{signTime},</if>
+            <if test="payType != null">#{payType},</if>
+            <if test="cashType != null">#{cashType},</if>
+            <if test="total != null">#{total},</if>
+            <if test="realTotal != null">#{realTotal},</if>
+            <if test="isFirst != null">#{isFirst},</if>
+            <if test="signAddr != null">#{signAddr},</if>
+            <if test="status != null">#{status},</if>
+            <if test="contenxt != null">#{contenxt},</if>
+            <if test="fileAttach != null">#{fileAttach},</if>
+         </trim>
+    </insert>
+
+    <update id="updateSysContract" parameterType="SysContract">
+        update sys_contract
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="title != null">title = #{title},</if>
+            <if test="contractCode != null">contract_code = #{contractCode},</if>
+            <if test="contractType != null">contract_type = #{contractType},</if>
+            <if test="startTime != null">start_time = #{startTime},</if>
+            <if test="endTime != null">end_time = #{endTime},</if>
+            <if test="signTime != null">sign_time = #{signTime},</if>
+            <if test="payType != null">pay_type = #{payType},</if>
+            <if test="cashType != null">cash_type = #{cashType},</if>
+            <if test="total != null">total = #{total},</if>
+            <if test="realTotal != null">real_total = #{realTotal},</if>
+            <if test="isFirst != null">is_first = #{isFirst},</if>
+            <if test="signAddr != null">sign_addr = #{signAddr},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="contenxt != null">contenxt = #{contenxt},</if>
+            <if test="fileAttach != null">file_attach = #{fileAttach},</if>
+        </trim>
+        where contract_id = #{contractId}
+    </update>
+
+    <delete id="deleteSysContractByContractId" parameterType="String">
+        delete from sys_contract where contract_id = #{contractId}
+    </delete>
+
+    <delete id="deleteSysContractByContractIds" parameterType="String">
+        delete from sys_contract where contract_id in 
+        <foreach item="contractId" collection="array" open="(" separator="," close=")">
+            #{contractId}
+        </foreach>
+    </delete>
+</mapper>
