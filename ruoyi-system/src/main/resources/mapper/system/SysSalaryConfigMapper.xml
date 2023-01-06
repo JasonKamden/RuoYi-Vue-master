@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.SysSalaryConfigMapper">
+    
+    <resultMap type="SysSalaryConfig" id="SysSalaryConfigResult">
+        <result property="id"    column="id"    />
+        <result property="userId"    column="user_id"    />
+        <result property="baseWage"    column="base_wage"    />
+        <result property="otPay"    column="ot_pay"    />
+        <result property="socialWelfare"    column="social_welfare"    />
+        <result property="providentFund"    column="provident_fund"    />
+        <result property="sum"    column="sum"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectSysSalaryConfigVo">
+        select id, user_id, base_wage, ot_pay, social_welfare, provident_fund, sum, create_by, create_time, update_by, update_time, remark from sys_salary_config
+    </sql>
+
+    <select id="selectSysSalaryConfigList" parameterType="SysSalaryConfig" resultMap="SysSalaryConfigResult">
+        <include refid="selectSysSalaryConfigVo"/>
+        <where>  
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="baseWage != null "> and base_wage = #{baseWage}</if>
+            <if test="otPay != null "> and ot_pay = #{otPay}</if>
+            <if test="socialWelfare != null "> and social_welfare = #{socialWelfare}</if>
+            <if test="providentFund != null "> and provident_fund = #{providentFund}</if>
+            <if test="sum != null "> and sum = #{sum}</if>
+        </where>
+    </select>
+    
+    <select id="selectSysSalaryConfigById" parameterType="Long" resultMap="SysSalaryConfigResult">
+        <include refid="selectSysSalaryConfigVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertSysSalaryConfig" parameterType="SysSalaryConfig" useGeneratedKeys="true" keyProperty="id">
+        insert into sys_salary_config
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">user_id,</if>
+            <if test="baseWage != null">base_wage,</if>
+            <if test="otPay != null">ot_pay,</if>
+            <if test="socialWelfare != null">social_welfare,</if>
+            <if test="providentFund != null">provident_fund,</if>
+            <if test="sum != null">sum,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">#{userId},</if>
+            <if test="baseWage != null">#{baseWage},</if>
+            <if test="otPay != null">#{otPay},</if>
+            <if test="socialWelfare != null">#{socialWelfare},</if>
+            <if test="providentFund != null">#{providentFund},</if>
+            <if test="sum != null">#{sum},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateSysSalaryConfig" parameterType="SysSalaryConfig">
+        update sys_salary_config
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="baseWage != null">base_wage = #{baseWage},</if>
+            <if test="otPay != null">ot_pay = #{otPay},</if>
+            <if test="socialWelfare != null">social_welfare = #{socialWelfare},</if>
+            <if test="providentFund != null">provident_fund = #{providentFund},</if>
+            <if test="sum != null">sum = #{sum},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteSysSalaryConfigById" parameterType="Long">
+        delete from sys_salary_config where id = #{id}
+    </delete>
+
+    <delete id="deleteSysSalaryConfigByIds" parameterType="String">
+        delete from sys_salary_config where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
