@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.SysMeetingUserMapper">
+    
+    <resultMap type="SysMeetingUser" id="SysMeetingUserResult">
+        <result property="meetingId"    column="meeting_id"    />
+        <result property="userId"    column="user_id"    />
+        <result property="nickName"    column="nick_name"    />
+        <result property="email"    column="email"    />
+        <result property="phoneNumber"    column="phone_number"    />
+        <result property="status"    column="status"    />
+    </resultMap>
+
+    <sql id="selectSysMeetingUserVo">
+        select meeting_id, user_id, nick_name, email, phone_number, status from sys_meeting_user
+    </sql>
+
+    <select id="selectSysMeetingUserList" parameterType="SysMeetingUser" resultMap="SysMeetingUserResult">
+        <include refid="selectSysMeetingUserVo"/>
+        <where>  
+            <if test="meetingId != null  and meetingId != ''"> and meeting_id = #{meetingId}</if>
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="nickName != null  and nickName != ''"> and nick_name like concat('%', #{nickName}, '%')</if>
+            <if test="email != null  and email != ''"> and email = #{email}</if>
+            <if test="phoneNumber != null  and phoneNumber != ''"> and phone_number = #{phoneNumber}</if>
+            <if test="status != null  and status != ''"> and status = #{status}</if>
+        </where>
+    </select>
+    
+    <select id="selectSysMeetingUserByMeetingId" parameterType="String" resultMap="SysMeetingUserResult">
+        <include refid="selectSysMeetingUserVo"/>
+        where meeting_id = #{meetingId}
+    </select>
+        
+    <insert id="insertSysMeetingUser" parameterType="SysMeetingUser">
+        insert into sys_meeting_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="meetingId != null and meetingId != ''">meeting_id,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="nickName != null and nickName != ''">nick_name,</if>
+            <if test="email != null">email,</if>
+            <if test="phoneNumber != null">phone_number,</if>
+            <if test="status != null">status,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="meetingId != null and meetingId != ''">#{meetingId},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="nickName != null and nickName != ''">#{nickName},</if>
+            <if test="email != null">#{email},</if>
+            <if test="phoneNumber != null">#{phoneNumber},</if>
+            <if test="status != null">#{status},</if>
+         </trim>
+    </insert>
+
+    <update id="updateSysMeetingUser" parameterType="SysMeetingUser">
+        update sys_meeting_user
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="nickName != null and nickName != ''">nick_name = #{nickName},</if>
+            <if test="email != null">email = #{email},</if>
+            <if test="phoneNumber != null">phone_number = #{phoneNumber},</if>
+            <if test="status != null">status = #{status},</if>
+        </trim>
+        where meeting_id = #{meetingId}
+    </update>
+
+    <delete id="deleteSysMeetingUserByMeetingId" parameterType="String">
+        delete from sys_meeting_user where meeting_id = #{meetingId}
+    </delete>
+
+    <delete id="deleteSysMeetingUserByMeetingIds" parameterType="String">
+        delete from sys_meeting_user where meeting_id in 
+        <foreach item="meetingId" collection="array" open="(" separator="," close=")">
+            #{meetingId}
+        </foreach>
+    </delete>
+</mapper>
