@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.SysSuppliesDetailMapper">
+    
+    <resultMap type="SysSuppliesDetail" id="SysSuppliesDetailResult">
+        <result property="suppliesId"    column="supplies_id"    />
+        <result property="suppliesName"    column="supplies_name"    />
+        <result property="suppliesCode"    column="supplies_code"    />
+        <result property="sortId"    column="sort_id"    />
+        <result property="unit"    column="unit"    />
+        <result property="quantity"    column="quantity"    />
+        <result property="brand"    column="brand"    />
+        <result property="model"    column="model"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectSysSuppliesDetailVo">
+        select supplies_id, supplies_name, supplies_code, sort_id, unit, quantity, brand, model, create_by, create_time, update_by, update_time, remark from sys_supplies_detail
+    </sql>
+
+    <select id="selectSysSuppliesDetailList" parameterType="SysSuppliesDetail" resultMap="SysSuppliesDetailResult">
+        <include refid="selectSysSuppliesDetailVo"/>
+        <where>  
+            <if test="suppliesName != null  and suppliesName != ''"> and supplies_name like concat('%', #{suppliesName}, '%')</if>
+            <if test="suppliesCode != null  and suppliesCode != ''"> and supplies_code = #{suppliesCode}</if>
+            <if test="sortId != null "> and sort_id = #{sortId}</if>
+            <if test="unit != null  and unit != ''"> and unit = #{unit}</if>
+            <if test="quantity != null "> and quantity = #{quantity}</if>
+            <if test="brand != null  and brand != ''"> and brand = #{brand}</if>
+            <if test="model != null  and model != ''"> and model = #{model}</if>
+        </where>
+    </select>
+    
+    <select id="selectSysSuppliesDetailBySuppliesId" parameterType="Long" resultMap="SysSuppliesDetailResult">
+        <include refid="selectSysSuppliesDetailVo"/>
+        where supplies_id = #{suppliesId}
+    </select>
+        
+    <insert id="insertSysSuppliesDetail" parameterType="SysSuppliesDetail" useGeneratedKeys="true" keyProperty="suppliesId">
+        insert into sys_supplies_detail
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="suppliesName != null">supplies_name,</if>
+            <if test="suppliesCode != null">supplies_code,</if>
+            <if test="sortId != null">sort_id,</if>
+            <if test="unit != null">unit,</if>
+            <if test="quantity != null">quantity,</if>
+            <if test="brand != null">brand,</if>
+            <if test="model != null">model,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="suppliesName != null">#{suppliesName},</if>
+            <if test="suppliesCode != null">#{suppliesCode},</if>
+            <if test="sortId != null">#{sortId},</if>
+            <if test="unit != null">#{unit},</if>
+            <if test="quantity != null">#{quantity},</if>
+            <if test="brand != null">#{brand},</if>
+            <if test="model != null">#{model},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateSysSuppliesDetail" parameterType="SysSuppliesDetail">
+        update sys_supplies_detail
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="suppliesName != null">supplies_name = #{suppliesName},</if>
+            <if test="suppliesCode != null">supplies_code = #{suppliesCode},</if>
+            <if test="sortId != null">sort_id = #{sortId},</if>
+            <if test="unit != null">unit = #{unit},</if>
+            <if test="quantity != null">quantity = #{quantity},</if>
+            <if test="brand != null">brand = #{brand},</if>
+            <if test="model != null">model = #{model},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where supplies_id = #{suppliesId}
+    </update>
+
+    <delete id="deleteSysSuppliesDetailBySuppliesId" parameterType="Long">
+        delete from sys_supplies_detail where supplies_id = #{suppliesId}
+    </delete>
+
+    <delete id="deleteSysSuppliesDetailBySuppliesIds" parameterType="String">
+        delete from sys_supplies_detail where supplies_id in 
+        <foreach item="suppliesId" collection="array" open="(" separator="," close=")">
+            #{suppliesId}
+        </foreach>
+    </delete>
+</mapper>
