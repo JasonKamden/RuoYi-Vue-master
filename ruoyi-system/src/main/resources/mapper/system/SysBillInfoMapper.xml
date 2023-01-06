@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.SysBillInfoMapper">
+    
+    <resultMap type="SysBillInfo" id="SysBillInfoResult">
+        <result property="billId"    column="bill_id"    />
+        <result property="recordId"    column="record_id"    />
+        <result property="billCode"    column="bill_code"    />
+        <result property="billType"    column="bill_type"    />
+        <result property="isOpen"    column="is_open"    />
+        <result property="total"    column="total"    />
+        <result property="billTime"    column="bill_time"    />
+        <result property="status"    column="status"    />
+        <result property="fileAttach"    column="file_attach"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectSysBillInfoVo">
+        select bill_id, record_id, bill_code, bill_type, is_open, total, bill_time, status, file_attach, create_by, create_time, update_by, update_time, remark from sys_bill_info
+    </sql>
+
+    <select id="selectSysBillInfoList" parameterType="SysBillInfo" resultMap="SysBillInfoResult">
+        <include refid="selectSysBillInfoVo"/>
+        <where>  
+            <if test="recordId != null  and recordId != ''"> and record_id = #{recordId}</if>
+            <if test="billCode != null  and billCode != ''"> and bill_code = #{billCode}</if>
+            <if test="billType != null  and billType != ''"> and bill_type = #{billType}</if>
+            <if test="isOpen != null  and isOpen != ''"> and is_open = #{isOpen}</if>
+            <if test="total != null  and total != ''"> and total = #{total}</if>
+            <if test="billTime != null "> and bill_time = #{billTime}</if>
+            <if test="status != null  and status != ''"> and status = #{status}</if>
+            <if test="fileAttach != null  and fileAttach != ''"> and file_attach = #{fileAttach}</if>
+        </where>
+    </select>
+    
+    <select id="selectSysBillInfoByBillId" parameterType="String" resultMap="SysBillInfoResult">
+        <include refid="selectSysBillInfoVo"/>
+        where bill_id = #{billId}
+    </select>
+        
+    <insert id="insertSysBillInfo" parameterType="SysBillInfo">
+        insert into sys_bill_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="billId != null">bill_id,</if>
+            <if test="recordId != null">record_id,</if>
+            <if test="billCode != null">bill_code,</if>
+            <if test="billType != null">bill_type,</if>
+            <if test="isOpen != null">is_open,</if>
+            <if test="total != null">total,</if>
+            <if test="billTime != null">bill_time,</if>
+            <if test="status != null">status,</if>
+            <if test="fileAttach != null">file_attach,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="billId != null">#{billId},</if>
+            <if test="recordId != null">#{recordId},</if>
+            <if test="billCode != null">#{billCode},</if>
+            <if test="billType != null">#{billType},</if>
+            <if test="isOpen != null">#{isOpen},</if>
+            <if test="total != null">#{total},</if>
+            <if test="billTime != null">#{billTime},</if>
+            <if test="status != null">#{status},</if>
+            <if test="fileAttach != null">#{fileAttach},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateSysBillInfo" parameterType="SysBillInfo">
+        update sys_bill_info
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="recordId != null">record_id = #{recordId},</if>
+            <if test="billCode != null">bill_code = #{billCode},</if>
+            <if test="billType != null">bill_type = #{billType},</if>
+            <if test="isOpen != null">is_open = #{isOpen},</if>
+            <if test="total != null">total = #{total},</if>
+            <if test="billTime != null">bill_time = #{billTime},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="fileAttach != null">file_attach = #{fileAttach},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where bill_id = #{billId}
+    </update>
+
+    <delete id="deleteSysBillInfoByBillId" parameterType="String">
+        delete from sys_bill_info where bill_id = #{billId}
+    </delete>
+
+    <delete id="deleteSysBillInfoByBillIds" parameterType="String">
+        delete from sys_bill_info where bill_id in 
+        <foreach item="billId" collection="array" open="(" separator="," close=")">
+            #{billId}
+        </foreach>
+    </delete>
+</mapper>
