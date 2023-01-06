@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.SysAttendInfoMapper">
+    
+    <resultMap type="SysAttendInfo" id="SysAttendInfoResult">
+        <result property="attendId"    column="attend_id"    />
+        <result property="userId"    column="user_id"    />
+        <result property="nickName"    column="nick_name"    />
+        <result property="attendDate"    column="attend_date"    />
+        <result property="attendUpTime"    column="attend_up_time"    />
+        <result property="attendDownTime"    column="attend_down_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectSysAttendInfoVo">
+        select attend_id, user_id, nick_name, attend_date, attend_up_time, attend_down_time, remark from sys_attend_info
+    </sql>
+
+    <select id="selectSysAttendInfoList" parameterType="SysAttendInfo" resultMap="SysAttendInfoResult">
+        <include refid="selectSysAttendInfoVo"/>
+        <where>  
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="nickName != null  and nickName != ''"> and nick_name like concat('%', #{nickName}, '%')</if>
+            <if test="attendDate != null "> and attend_date = #{attendDate}</if>
+            <if test="attendUpTime != null "> and attend_up_time = #{attendUpTime}</if>
+            <if test="attendDownTime != null "> and attend_down_time = #{attendDownTime}</if>
+        </where>
+    </select>
+    
+    <select id="selectSysAttendInfoByAttendId" parameterType="String" resultMap="SysAttendInfoResult">
+        <include refid="selectSysAttendInfoVo"/>
+        where attend_id = #{attendId}
+    </select>
+        
+    <insert id="insertSysAttendInfo" parameterType="SysAttendInfo">
+        insert into sys_attend_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="attendId != null">attend_id,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="nickName != null">nick_name,</if>
+            <if test="attendDate != null">attend_date,</if>
+            <if test="attendUpTime != null">attend_up_time,</if>
+            <if test="attendDownTime != null">attend_down_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="attendId != null">#{attendId},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="nickName != null">#{nickName},</if>
+            <if test="attendDate != null">#{attendDate},</if>
+            <if test="attendUpTime != null">#{attendUpTime},</if>
+            <if test="attendDownTime != null">#{attendDownTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateSysAttendInfo" parameterType="SysAttendInfo">
+        update sys_attend_info
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="nickName != null">nick_name = #{nickName},</if>
+            <if test="attendDate != null">attend_date = #{attendDate},</if>
+            <if test="attendUpTime != null">attend_up_time = #{attendUpTime},</if>
+            <if test="attendDownTime != null">attend_down_time = #{attendDownTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where attend_id = #{attendId}
+    </update>
+
+    <delete id="deleteSysAttendInfoByAttendId" parameterType="String">
+        delete from sys_attend_info where attend_id = #{attendId}
+    </delete>
+
+    <delete id="deleteSysAttendInfoByAttendIds" parameterType="String">
+        delete from sys_attend_info where attend_id in 
+        <foreach item="attendId" collection="array" open="(" separator="," close=")">
+            #{attendId}
+        </foreach>
+    </delete>
+</mapper>
