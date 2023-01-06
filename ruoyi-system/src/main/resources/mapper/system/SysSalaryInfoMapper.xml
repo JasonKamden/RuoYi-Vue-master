@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.SysSalaryInfoMapper">
+    
+    <resultMap type="SysSalaryInfo" id="SysSalaryInfoResult">
+        <result property="id"    column="id"    />
+        <result property="userId"    column="user_id"    />
+        <result property="workDays"    column="work_days"    />
+        <result property="otHour"    column="ot_hour"    />
+        <result property="absentDays"    column="absent_days"    />
+        <result property="sickDays"    column="sick_days"    />
+        <result property="providentFund"    column="provident_fund"    />
+        <result property="sum"    column="sum"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectSysSalaryInfoVo">
+        select id, user_id, work_days, ot_hour, absent_days, sick_days, provident_fund, sum, create_by, create_time, update_by, update_time, remark from sys_salary_info
+    </sql>
+
+    <select id="selectSysSalaryInfoList" parameterType="SysSalaryInfo" resultMap="SysSalaryInfoResult">
+        <include refid="selectSysSalaryInfoVo"/>
+        <where>  
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="workDays != null "> and work_days = #{workDays}</if>
+            <if test="otHour != null "> and ot_hour = #{otHour}</if>
+            <if test="absentDays != null "> and absent_days = #{absentDays}</if>
+            <if test="sickDays != null "> and sick_days = #{sickDays}</if>
+            <if test="providentFund != null "> and provident_fund = #{providentFund}</if>
+            <if test="sum != null "> and sum = #{sum}</if>
+        </where>
+    </select>
+    
+    <select id="selectSysSalaryInfoById" parameterType="Long" resultMap="SysSalaryInfoResult">
+        <include refid="selectSysSalaryInfoVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertSysSalaryInfo" parameterType="SysSalaryInfo" useGeneratedKeys="true" keyProperty="id">
+        insert into sys_salary_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">user_id,</if>
+            <if test="workDays != null">work_days,</if>
+            <if test="otHour != null">ot_hour,</if>
+            <if test="absentDays != null">absent_days,</if>
+            <if test="sickDays != null">sick_days,</if>
+            <if test="providentFund != null">provident_fund,</if>
+            <if test="sum != null">sum,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">#{userId},</if>
+            <if test="workDays != null">#{workDays},</if>
+            <if test="otHour != null">#{otHour},</if>
+            <if test="absentDays != null">#{absentDays},</if>
+            <if test="sickDays != null">#{sickDays},</if>
+            <if test="providentFund != null">#{providentFund},</if>
+            <if test="sum != null">#{sum},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateSysSalaryInfo" parameterType="SysSalaryInfo">
+        update sys_salary_info
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="workDays != null">work_days = #{workDays},</if>
+            <if test="otHour != null">ot_hour = #{otHour},</if>
+            <if test="absentDays != null">absent_days = #{absentDays},</if>
+            <if test="sickDays != null">sick_days = #{sickDays},</if>
+            <if test="providentFund != null">provident_fund = #{providentFund},</if>
+            <if test="sum != null">sum = #{sum},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteSysSalaryInfoById" parameterType="Long">
+        delete from sys_salary_info where id = #{id}
+    </delete>
+
+    <delete id="deleteSysSalaryInfoByIds" parameterType="String">
+        delete from sys_salary_info where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
