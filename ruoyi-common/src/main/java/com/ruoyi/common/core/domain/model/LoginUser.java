@@ -1,6 +1,7 @@
 package com.ruoyi.common.core.domain.model;
 
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Set;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -261,6 +262,6 @@ public class LoginUser implements UserDetails
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities()
     {
-        return null;
+        return new HashSet();
     }
 }

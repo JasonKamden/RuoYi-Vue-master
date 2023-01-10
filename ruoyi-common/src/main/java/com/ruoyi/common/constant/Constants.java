@@ -10,6 +10,17 @@ import io.jsonwebtoken.Claims;
 public class Constants
 {
     /**
+     * CAS登录成功后的后台标识
+     */
+    public static final String CAS_TOKEN = "cas_token";
+
+    /**
+     * CAS登录成功后的前台Cookie的Key
+     */
+    public static final String WEB_TOKEN_KEY = "Admin-Token";
+
+
+    /**
      * UTF-8 字符集
      */
     public static final String UTF8 = "UTF-8";
