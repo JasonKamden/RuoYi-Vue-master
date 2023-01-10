@@ -1,6 +1,8 @@
 package com.ruoyi.system.service.impl;
 
 import java.util.List;
+
+import com.ruoyi.common.utils.uuid.IdUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.system.mapper.SysTaskInfoMapper;
@@ -52,6 +54,7 @@ public class SysTaskInfoServiceImpl implements ISysTaskInfoService
     @Override
     public int insertSysTaskInfo(SysTaskInfo sysTaskInfo)
     {
+        sysTaskInfo.setTaskId(IdUtils.simpleUUID());
         return sysTaskInfoMapper.insertSysTaskInfo(sysTaskInfo);
     }
 

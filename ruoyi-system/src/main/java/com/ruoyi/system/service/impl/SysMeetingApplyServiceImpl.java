@@ -2,6 +2,7 @@ package com.ruoyi.system.service.impl;
 
 import java.util.List;
 import com.ruoyi.common.utils.DateUtils;
+import com.ruoyi.common.utils.uuid.IdUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.system.mapper.SysMeetingApplyMapper;
@@ -54,6 +55,7 @@ public class SysMeetingApplyServiceImpl implements ISysMeetingApplyService
     public int insertSysMeetingApply(SysMeetingApply sysMeetingApply)
     {
         sysMeetingApply.setCreateTime(DateUtils.getNowDate());
+        sysMeetingApply.setMeetingId(IdUtils.simpleUUID());
         return sysMeetingApplyMapper.insertSysMeetingApply(sysMeetingApply);
     }
 

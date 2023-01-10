@@ -2,6 +2,7 @@ package com.ruoyi.system.service.impl;
 
 import java.util.List;
 import com.ruoyi.common.utils.DateUtils;
+import com.ruoyi.common.utils.uuid.IdUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.system.mapper.SysTaskManageMapper;
@@ -54,6 +55,7 @@ public class SysTaskManageServiceImpl implements ISysTaskManageService
     public int insertSysTaskManage(SysTaskManage sysTaskManage)
     {
         sysTaskManage.setCreateTime(DateUtils.getNowDate());
+        sysTaskManage.setTaskId(IdUtils.simpleUUID());
         return sysTaskManageMapper.insertSysTaskManage(sysTaskManage);
     }
 

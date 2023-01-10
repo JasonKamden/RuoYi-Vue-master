@@ -2,6 +2,7 @@ package com.ruoyi.system.service.impl;
 
 import java.util.List;
 import com.ruoyi.common.utils.DateUtils;
+import com.ruoyi.common.utils.uuid.IdUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
@@ -59,6 +60,7 @@ public class SysContractInfoServiceImpl implements ISysContractInfoService
     public int insertSysContractInfo(SysContractInfo sysContractInfo)
     {
         sysContractInfo.setCreateTime(DateUtils.getNowDate());
+        sysContractInfo.setInfoId(IdUtils.simpleUUID());
         int rows = sysContractInfoMapper.insertSysContractInfo(sysContractInfo);
         insertSysContract(sysContractInfo);
         return rows;

@@ -1,6 +1,8 @@
 package com.ruoyi.system.service.impl;
 
 import java.util.List;
+
+import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 import com.ruoyi.common.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -54,6 +56,7 @@ public class SysSalaryInfoServiceImpl implements ISysSalaryInfoService
     public int insertSysSalaryInfo(SysSalaryInfo sysSalaryInfo)
     {
         sysSalaryInfo.setCreateTime(DateUtils.getNowDate());
+        sysSalaryInfo.setId(IdWorker.getId());
         return sysSalaryInfoMapper.insertSysSalaryInfo(sysSalaryInfo);
     }
 

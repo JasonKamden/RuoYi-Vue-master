@@ -1,6 +1,8 @@
 package com.ruoyi.system.service.impl;
 
 import java.util.List;
+
+import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 import com.ruoyi.common.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -54,6 +56,7 @@ public class SysSuppliesApplyServiceImpl implements ISysSuppliesApplyService
     public int insertSysSuppliesApply(SysSuppliesApply sysSuppliesApply)
     {
         sysSuppliesApply.setCreateTime(DateUtils.getNowDate());
+        sysSuppliesApply.setSuppliesId(IdWorker.getId());
         return sysSuppliesApplyMapper.insertSysSuppliesApply(sysSuppliesApply);
     }
 

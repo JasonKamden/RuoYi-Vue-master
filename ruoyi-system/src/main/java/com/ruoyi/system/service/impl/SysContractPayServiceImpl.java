@@ -2,6 +2,7 @@ package com.ruoyi.system.service.impl;
 
 import java.util.List;
 import com.ruoyi.common.utils.DateUtils;
+import com.ruoyi.common.utils.uuid.IdUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.system.mapper.SysContractPayMapper;
@@ -54,6 +55,7 @@ public class SysContractPayServiceImpl implements ISysContractPayService
     public int insertSysContractPay(SysContractPay sysContractPay)
     {
         sysContractPay.setCreateTime(DateUtils.getNowDate());
+        sysContractPay.setRecordId(IdUtils.simpleUUID());
         return sysContractPayMapper.insertSysContractPay(sysContractPay);
     }
 

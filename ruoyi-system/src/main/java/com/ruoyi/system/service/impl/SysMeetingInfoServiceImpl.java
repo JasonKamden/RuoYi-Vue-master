@@ -2,6 +2,7 @@ package com.ruoyi.system.service.impl;
 
 import java.util.List;
 import com.ruoyi.common.utils.DateUtils;
+import com.ruoyi.common.utils.uuid.IdUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.system.mapper.SysMeetingInfoMapper;
@@ -54,6 +55,7 @@ public class SysMeetingInfoServiceImpl implements ISysMeetingInfoService
     public int insertSysMeetingInfo(SysMeetingInfo sysMeetingInfo)
     {
         sysMeetingInfo.setCreateTime(DateUtils.getNowDate());
+        sysMeetingInfo.setRoomId(IdUtils.simpleUUID());
         return sysMeetingInfoMapper.insertSysMeetingInfo(sysMeetingInfo);
     }
 

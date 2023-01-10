@@ -1,6 +1,8 @@
 package com.ruoyi.system.service.impl;
 
 import java.util.List;
+
+import com.ruoyi.common.utils.uuid.IdUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.system.mapper.SysAttendInfoMapper;
@@ -52,6 +54,7 @@ public class SysAttendInfoServiceImpl implements ISysAttendInfoService
     @Override
     public int insertSysAttendInfo(SysAttendInfo sysAttendInfo)
     {
+        sysAttendInfo.setAttendId(IdUtils.simpleUUID());
         return sysAttendInfoMapper.insertSysAttendInfo(sysAttendInfo);
     }
 
