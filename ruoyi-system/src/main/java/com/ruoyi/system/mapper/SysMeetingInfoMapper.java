@@ -2,6 +2,7 @@ package com.ruoyi.system.mapper;
 
 import java.util.List;
 import com.ruoyi.system.domain.SysMeetingInfo;
+import org.apache.ibatis.annotations.Mapper;
 
 /**
  * 会议信息Mapper接口
@@ -9,6 +10,7 @@ import com.ruoyi.system.domain.SysMeetingInfo;
  * @author ruoyi
  * @date 2022-12-28
  */
+@Mapper
 public interface SysMeetingInfoMapper 
 {
     /**

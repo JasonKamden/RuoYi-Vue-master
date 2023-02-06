@@ -2,6 +2,7 @@ package com.ruoyi.system.mapper;
 
 import java.util.List;
 import com.ruoyi.system.domain.DailyTask;
+import org.apache.ibatis.annotations.Mapper;
 
 /**
  * 日常任务Mapper接口
@@ -9,6 +10,7 @@ import com.ruoyi.system.domain.DailyTask;
  * @author ruoyi
  * @date 2023-01-03
  */
+@Mapper
 public interface DailyTaskMapper 
 {
     /**

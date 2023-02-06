@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.system.mapper.SysContractPayMapper">
 
-    <resultMap type="SysContractPay" id="SysContractPayResult">
+    <resultMap type="com.ruoyi.system.domain.SysContractPay" id="SysContractPayResult">
         <result property="recordId" column="record_id"/>
         <result property="contractId" column="contract_id"/>
         <result property="userId" column="user_id"/>
@@ -31,7 +31,7 @@
         from sys_contract_pay
     </sql>
 
-    <select id="selectSysContractPayList" parameterType="SysContractPay" resultMap="SysContractPayResult">
+    <select id="selectSysContractPayList" parameterType="com.ruoyi.system.domain.SysContractPay" resultMap="SysContractPayResult">
         <include refid="selectSysContractPayVo"/>
         <where>
             <if test="contractId != null  and contractId != ''">and contract_id = #{contractId}</if>
@@ -46,7 +46,7 @@
         where record_id = #{recordId}
     </select>
 
-    <insert id="insertSysContractPay" parameterType="SysContractPay">
+    <insert id="insertSysContractPay" parameterType="com.ruoyi.system.domain.SysContractPay">
         insert into sys_contract_pay
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="recordId != null">record_id,</if>
@@ -74,7 +74,7 @@
         </trim>
     </insert>
 
-    <update id="updateSysContractPay" parameterType="SysContractPay">
+    <update id="updateSysContractPay" parameterType="com.ruoyi.system.domain.SysContractPay">
         update sys_contract_pay
         <trim prefix="SET" suffixOverrides=",">
             <if test="contractId != null">contract_id = #{contractId},</if>

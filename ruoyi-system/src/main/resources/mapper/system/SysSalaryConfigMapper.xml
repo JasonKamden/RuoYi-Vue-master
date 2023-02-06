@@ -4,7 +4,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.system.mapper.SysSalaryConfigMapper">
     
-    <resultMap type="SysSalaryConfig" id="SysSalaryConfigResult">
+    <resultMap type="com.ruoyi.system.domain.SysSalaryConfig" id="SysSalaryConfigResult">
         <result property="id"    column="id"    />
         <result property="userId"    column="user_id"    />
         <result property="baseWage"    column="base_wage"    />
@@ -23,7 +23,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         select id, user_id, base_wage, ot_pay, social_welfare, provident_fund, sum, create_by, create_time, update_by, update_time, remark from sys_salary_config
     </sql>
 
-    <select id="selectSysSalaryConfigList" parameterType="SysSalaryConfig" resultMap="SysSalaryConfigResult">
+    <select id="selectSysSalaryConfigList" parameterType="com.ruoyi.system.domain.SysSalaryConfig" resultMap="SysSalaryConfigResult">
         <include refid="selectSysSalaryConfigVo"/>
         <where>  
             <if test="userId != null "> and user_id = #{userId}</if>
@@ -40,7 +40,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where id = #{id}
     </select>
         
-    <insert id="insertSysSalaryConfig" parameterType="SysSalaryConfig" useGeneratedKeys="true" keyProperty="id">
+    <insert id="insertSysSalaryConfig" parameterType="com.ruoyi.system.domain.SysSalaryConfig" useGeneratedKeys="true" keyProperty="id">
         insert into sys_salary_config
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="userId != null">user_id,</if>
@@ -70,7 +70,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          </trim>
     </insert>
 
-    <update id="updateSysSalaryConfig" parameterType="SysSalaryConfig">
+    <update id="updateSysSalaryConfig" parameterType="com.ruoyi.system.domain.SysSalaryConfig">
         update sys_salary_config
         <trim prefix="SET" suffixOverrides=",">
             <if test="userId != null">user_id = #{userId},</if>

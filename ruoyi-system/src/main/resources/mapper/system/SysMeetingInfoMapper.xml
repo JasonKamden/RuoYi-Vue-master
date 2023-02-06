@@ -4,7 +4,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.system.mapper.SysMeetingInfoMapper">
     
-    <resultMap type="SysMeetingInfo" id="SysMeetingInfoResult">
+    <resultMap type="com.ruoyi.system.domain.SysMeetingInfo" id="SysMeetingInfoResult">
         <result property="roomId"    column="room_id"    />
         <result property="roomName"    column="room_name"    />
         <result property="roomPlace"    column="room_place"    />
@@ -22,7 +22,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         select room_id, room_name, room_place, capacity, status, del_flag, create_by, create_time, update_by, update_time, remark from sys_meeting_info
     </sql>
 
-    <select id="selectSysMeetingInfoList" parameterType="SysMeetingInfo" resultMap="SysMeetingInfoResult">
+    <select id="selectSysMeetingInfoList" parameterType="com.ruoyi.system.domain.SysMeetingInfo" resultMap="SysMeetingInfoResult">
         <include refid="selectSysMeetingInfoVo"/>
         <where>  
             <if test="roomName != null  and roomName != ''"> and room_name like concat('%', #{roomName}, '%')</if>
@@ -37,7 +37,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where room_id = #{roomId}
     </select>
         
-    <insert id="insertSysMeetingInfo" parameterType="SysMeetingInfo">
+    <insert id="insertSysMeetingInfo" parameterType="com.ruoyi.system.domain.SysMeetingInfo">
         insert into sys_meeting_info
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="roomId != null">room_id,</if>
@@ -67,7 +67,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          </trim>
     </insert>
 
-    <update id="updateSysMeetingInfo" parameterType="SysMeetingInfo">
+    <update id="updateSysMeetingInfo" parameterType="com.ruoyi.system.domain.SysMeetingInfo">
         update sys_meeting_info
         <trim prefix="SET" suffixOverrides=",">
             <if test="roomName != null">room_name = #{roomName},</if>

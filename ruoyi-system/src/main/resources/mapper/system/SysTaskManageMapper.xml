@@ -4,7 +4,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.system.mapper.SysTaskManageMapper">
     
-    <resultMap type="SysTaskManage" id="SysTaskManageResult">
+    <resultMap type="com.ruoyi.system.domain.SysTaskManage" id="SysTaskManageResult">
         <result property="taskId"    column="task_id"    />
         <result property="taskName"    column="task_name"    />
         <result property="taskContent"    column="task_content"    />
@@ -29,7 +29,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         select task_id, task_name, task_content, task_type, begin_time, end_time, status, duration, supervisor_account_id, participant_account_id, charge_account_id, task_level, file_attach, create_by, create_time, update_by, update_time, remark from sys_task_manage
     </sql>
 
-    <select id="selectSysTaskManageList" parameterType="SysTaskManage" resultMap="SysTaskManageResult">
+    <select id="selectSysTaskManageList" parameterType="com.ruoyi.system.domain.SysTaskManage" resultMap="SysTaskManageResult">
         <include refid="selectSysTaskManageVo"/>
         <where>  
             <if test="taskName != null  and taskName != ''"> and task_name like concat('%', #{taskName}, '%')</if>
@@ -52,7 +52,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where task_id = #{taskId}
     </select>
         
-    <insert id="insertSysTaskManage" parameterType="SysTaskManage">
+    <insert id="insertSysTaskManage" parameterType="com.ruoyi.system.domain.SysTaskManage">
         insert into sys_task_manage
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="taskId != null">task_id,</if>
@@ -96,7 +96,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          </trim>
     </insert>
 
-    <update id="updateSysTaskManage" parameterType="SysTaskManage">
+    <update id="updateSysTaskManage" parameterType="com.ruoyi.system.domain.SysTaskManage">
         update sys_task_manage
         <trim prefix="SET" suffixOverrides=",">
             <if test="taskName != null">task_name = #{taskName},</if>

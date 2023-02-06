@@ -4,7 +4,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.system.mapper.SysSuppliesMapper">
     
-    <resultMap type="SysSupplies" id="SysSuppliesResult">
+    <resultMap type="com.ruoyi.system.domain.SysSupplies" id="SysSuppliesResult">
         <result property="sortId"    column="sort_id"    />
         <result property="parentId"    column="parent_id"    />
         <result property="ancestors"    column="ancestors"    />
@@ -23,7 +23,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         select sort_id, parent_id, ancestors, sort_name, sort_no, status, del_flag, create_by, create_time, update_by, update_time, remark from sys_supplies
     </sql>
 
-    <select id="selectSysSuppliesList" parameterType="SysSupplies" resultMap="SysSuppliesResult">
+    <select id="selectSysSuppliesList" parameterType="com.ruoyi.system.domain.SysSupplies" resultMap="SysSuppliesResult">
         <include refid="selectSysSuppliesVo"/>
         <where>  
             <if test="parentId != null "> and parent_id = #{parentId}</if>
@@ -39,7 +39,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where sort_id = #{sortId}
     </select>
         
-    <insert id="insertSysSupplies" parameterType="SysSupplies" useGeneratedKeys="true" keyProperty="sortId">
+    <insert id="insertSysSupplies" parameterType="com.ruoyi.system.domain.SysSupplies" useGeneratedKeys="true" keyProperty="sortId">
         insert into sys_supplies
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="parentId != null">parent_id,</if>
@@ -69,7 +69,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          </trim>
     </insert>
 
-    <update id="updateSysSupplies" parameterType="SysSupplies">
+    <update id="updateSysSupplies" parameterType="com.ruoyi.system.domain.SysSupplies">
         update sys_supplies
         <trim prefix="SET" suffixOverrides=",">
             <if test="parentId != null">parent_id = #{parentId},</if>

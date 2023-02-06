@@ -4,7 +4,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.system.mapper.SysBillInfoMapper">
     
-    <resultMap type="SysBillInfo" id="SysBillInfoResult">
+    <resultMap type="com.ruoyi.system.domain.SysBillInfo" id="SysBillInfoResult">
         <result property="billId"    column="bill_id"    />
         <result property="recordId"    column="record_id"    />
         <result property="billCode"    column="bill_code"    />
@@ -25,7 +25,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         select bill_id, record_id, bill_code, bill_type, is_open, total, bill_time, status, file_attach, create_by, create_time, update_by, update_time, remark from sys_bill_info
     </sql>
 
-    <select id="selectSysBillInfoList" parameterType="SysBillInfo" resultMap="SysBillInfoResult">
+    <select id="selectSysBillInfoList" parameterType="com.ruoyi.system.domain.SysBillInfo" resultMap="SysBillInfoResult">
         <include refid="selectSysBillInfoVo"/>
         <where>  
             <if test="recordId != null  and recordId != ''"> and record_id = #{recordId}</if>
@@ -44,7 +44,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where bill_id = #{billId}
     </select>
         
-    <insert id="insertSysBillInfo" parameterType="SysBillInfo">
+    <insert id="insertSysBillInfo" parameterType="com.ruoyi.system.domain.SysBillInfo">
         insert into sys_bill_info
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="billId != null">bill_id,</if>
@@ -80,7 +80,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          </trim>
     </insert>
 
-    <update id="updateSysBillInfo" parameterType="SysBillInfo">
+    <update id="updateSysBillInfo" parameterType="com.ruoyi.system.domain.SysBillInfo">
         update sys_bill_info
         <trim prefix="SET" suffixOverrides=",">
             <if test="recordId != null">record_id = #{recordId},</if>

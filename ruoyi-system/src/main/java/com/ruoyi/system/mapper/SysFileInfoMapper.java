@@ -2,6 +2,7 @@ package com.ruoyi.system.mapper;
 
 import java.util.List;
 import com.ruoyi.system.domain.SysFileInfo;
+import org.apache.ibatis.annotations.Mapper;
 
 /**
  * 文件管理Mapper接口
@@ -9,6 +10,7 @@ import com.ruoyi.system.domain.SysFileInfo;
  * @author ruoyi
  * @date 2022-12-29
  */
+@Mapper
 public interface SysFileInfoMapper 
 {
     /**

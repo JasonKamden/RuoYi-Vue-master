@@ -4,7 +4,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.system.mapper.SysSuppliesDetailMapper">
     
-    <resultMap type="SysSuppliesDetail" id="SysSuppliesDetailResult">
+    <resultMap type="com.ruoyi.system.domain.SysSuppliesDetail" id="SysSuppliesDetailResult">
         <result property="suppliesId"    column="supplies_id"    />
         <result property="suppliesName"    column="supplies_name"    />
         <result property="suppliesCode"    column="supplies_code"    />
@@ -24,7 +24,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         select supplies_id, supplies_name, supplies_code, sort_id, unit, quantity, brand, model, create_by, create_time, update_by, update_time, remark from sys_supplies_detail
     </sql>
 
-    <select id="selectSysSuppliesDetailList" parameterType="SysSuppliesDetail" resultMap="SysSuppliesDetailResult">
+    <select id="selectSysSuppliesDetailList" parameterType="com.ruoyi.system.domain.SysSuppliesDetail" resultMap="SysSuppliesDetailResult">
         <include refid="selectSysSuppliesDetailVo"/>
         <where>  
             <if test="suppliesName != null  and suppliesName != ''"> and supplies_name like concat('%', #{suppliesName}, '%')</if>
@@ -42,7 +42,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where supplies_id = #{suppliesId}
     </select>
         
-    <insert id="insertSysSuppliesDetail" parameterType="SysSuppliesDetail" useGeneratedKeys="true" keyProperty="suppliesId">
+    <insert id="insertSysSuppliesDetail" parameterType="com.ruoyi.system.domain.SysSuppliesDetail" useGeneratedKeys="true" keyProperty="suppliesId">
         insert into sys_supplies_detail
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="suppliesName != null">supplies_name,</if>
@@ -74,7 +74,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          </trim>
     </insert>
 
-    <update id="updateSysSuppliesDetail" parameterType="SysSuppliesDetail">
+    <update id="updateSysSuppliesDetail" parameterType="com.ruoyi.system.domain.SysSuppliesDetail">
         update sys_supplies_detail
         <trim prefix="SET" suffixOverrides=",">
             <if test="suppliesName != null">supplies_name = #{suppliesName},</if>

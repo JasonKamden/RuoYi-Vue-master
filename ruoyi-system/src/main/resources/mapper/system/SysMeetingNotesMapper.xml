@@ -4,7 +4,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.system.mapper.SysMeetingNotesMapper">
     
-    <resultMap type="SysMeetingNotes" id="SysMeetingNotesResult">
+    <resultMap type="com.ruoyi.system.domain.SysMeetingNotes" id="SysMeetingNotesResult">
         <result property="notesId"    column="notes_id"    />
         <result property="meetingId"    column="meeting_id"    />
         <result property="notesTitle"    column="notes_title"    />
@@ -22,7 +22,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         select notes_id, meeting_id, notes_title, notes_user, content, notes_file, create_by, create_time, update_by, update_time, remark from sys_meeting_notes
     </sql>
 
-    <select id="selectSysMeetingNotesList" parameterType="SysMeetingNotes" resultMap="SysMeetingNotesResult">
+    <select id="selectSysMeetingNotesList" parameterType="com.ruoyi.system.domain.SysMeetingNotes" resultMap="SysMeetingNotesResult">
         <include refid="selectSysMeetingNotesVo"/>
         <where>  
             <if test="meetingId != null  and meetingId != ''"> and meeting_id = #{meetingId}</if>
@@ -38,7 +38,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where notes_id = #{notesId}
     </select>
         
-    <insert id="insertSysMeetingNotes" parameterType="SysMeetingNotes">
+    <insert id="insertSysMeetingNotes" parameterType="com.ruoyi.system.domain.SysMeetingNotes">
         insert into sys_meeting_notes
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="notesId != null">notes_id,</if>
@@ -68,7 +68,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          </trim>
     </insert>
 
-    <update id="updateSysMeetingNotes" parameterType="SysMeetingNotes">
+    <update id="updateSysMeetingNotes" parameterType="com.ruoyi.system.domain.SysMeetingNotes">
         update sys_meeting_notes
         <trim prefix="SET" suffixOverrides=",">
             <if test="meetingId != null and meetingId != ''">meeting_id = #{meetingId},</if>

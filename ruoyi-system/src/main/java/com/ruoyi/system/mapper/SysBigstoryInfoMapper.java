@@ -2,6 +2,7 @@ package com.ruoyi.system.mapper;
 
 import java.util.List;
 import com.ruoyi.system.domain.SysBigstoryInfo;
+import org.apache.ibatis.annotations.Mapper;
 
 /**
  * 大事记管理Mapper接口
@@ -9,6 +10,7 @@ import com.ruoyi.system.domain.SysBigstoryInfo;
  * @author ruoyi
  * @date 2022-12-29
  */
+@Mapper
 public interface SysBigstoryInfoMapper 
 {
     /**

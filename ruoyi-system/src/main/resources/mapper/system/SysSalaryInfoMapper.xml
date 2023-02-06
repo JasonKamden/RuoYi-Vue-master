@@ -4,7 +4,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.system.mapper.SysSalaryInfoMapper">
     
-    <resultMap type="SysSalaryInfo" id="SysSalaryInfoResult">
+    <resultMap type="com.ruoyi.system.domain.SysSalaryInfo" id="SysSalaryInfoResult">
         <result property="id"    column="id"    />
         <result property="userId"    column="user_id"    />
         <result property="workDays"    column="work_days"    />
@@ -24,7 +24,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         select id, user_id, work_days, ot_hour, absent_days, sick_days, provident_fund, sum, create_by, create_time, update_by, update_time, remark from sys_salary_info
     </sql>
 
-    <select id="selectSysSalaryInfoList" parameterType="SysSalaryInfo" resultMap="SysSalaryInfoResult">
+    <select id="selectSysSalaryInfoList" parameterType="com.ruoyi.system.domain.SysSalaryInfo" resultMap="SysSalaryInfoResult">
         <include refid="selectSysSalaryInfoVo"/>
         <where>  
             <if test="userId != null "> and user_id = #{userId}</if>
@@ -42,7 +42,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where id = #{id}
     </select>
         
-    <insert id="insertSysSalaryInfo" parameterType="SysSalaryInfo" useGeneratedKeys="true" keyProperty="id">
+    <insert id="insertSysSalaryInfo" parameterType="com.ruoyi.system.domain.SysSalaryInfo" useGeneratedKeys="true" keyProperty="id">
         insert into sys_salary_info
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="userId != null">user_id,</if>
@@ -74,7 +74,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          </trim>
     </insert>
 
-    <update id="updateSysSalaryInfo" parameterType="SysSalaryInfo">
+    <update id="updateSysSalaryInfo" parameterType="com.ruoyi.system.domain.SysSalaryInfo">
         update sys_salary_info
         <trim prefix="SET" suffixOverrides=",">
             <if test="userId != null">user_id = #{userId},</if>

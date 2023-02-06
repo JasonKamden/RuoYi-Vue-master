@@ -2,6 +2,7 @@ package com.ruoyi.system.mapper;
 
 import java.util.List;
 import com.ruoyi.system.domain.SysSuppliesDetail;
+import org.apache.ibatis.annotations.Mapper;
 
 /**
  * 物资详情Mapper接口
@@ -9,6 +10,7 @@ import com.ruoyi.system.domain.SysSuppliesDetail;
  * @author ruoyi
  * @date 2023-01-03
  */
+@Mapper
 public interface SysSuppliesDetailMapper 
 {
     /**

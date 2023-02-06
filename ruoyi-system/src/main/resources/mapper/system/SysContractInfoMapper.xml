@@ -4,7 +4,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.system.mapper.SysContractInfoMapper">
     
-    <resultMap type="SysContractInfo" id="SysContractInfoResult">
+    <resultMap type="com.ruoyi.system.domain.SysContractInfo" id="SysContractInfoResult">
         <result property="infoId"    column="info_id"    />
         <result property="contractId"    column="contract_id"    />
         <result property="firstName"    column="first_name"    />
@@ -30,11 +30,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="remark"    column="remark"    />
     </resultMap>
 
-    <resultMap id="SysContractInfoSysContractResult" type="SysContractInfo" extends="SysContractInfoResult">
+    <resultMap id="SysContractInfoSysContractResult" type="com.ruoyi.system.domain.SysContractInfo" extends="SysContractInfoResult">
         <collection property="sysContractList" notNullColumn="sub_contract_id" javaType="java.util.List" resultMap="SysContractResult" />
     </resultMap>
 
-    <resultMap type="SysContract" id="SysContractResult">
+    <resultMap type="com.ruoyi.system.domain.SysContract" id="SysContractResult">
         <result property="contractId"    column="sub_contract_id"    />
         <result property="title"    column="sub_title"    />
         <result property="contractCode"    column="sub_contract_code"    />
@@ -57,7 +57,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         select info_id, contract_id, first_name, second_name, first_addr, second_addr, first_legal_person, second_legal_person, first_sign_user, second_sign_user, first_mobile, second_mobile, first_bank, second_bank, first_bank_account, second_bank_account, first_tax_no, second_tax_no, create_by, create_time, update_by, update_time, remark from sys_contract_info
     </sql>
 
-    <select id="selectSysContractInfoList" parameterType="SysContractInfo" resultMap="SysContractInfoResult">
+    <select id="selectSysContractInfoList" parameterType="com.ruoyi.system.domain.SysContractInfo" resultMap="SysContractInfoResult">
         <include refid="selectSysContractInfoVo"/>
         <where>  
             <if test="contractId != null  and contractId != ''"> and contract_id = #{contractId}</if>
@@ -88,7 +88,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where a.info_id = #{infoId}
     </select>
         
-    <insert id="insertSysContractInfo" parameterType="SysContractInfo">
+    <insert id="insertSysContractInfo" parameterType="com.ruoyi.system.domain.SysContractInfo">
         insert into sys_contract_info
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="infoId != null">info_id,</if>
@@ -142,7 +142,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          </trim>
     </insert>
 
-    <update id="updateSysContractInfo" parameterType="SysContractInfo">
+    <update id="updateSysContractInfo" parameterType="com.ruoyi.system.domain.SysContractInfo">
         update sys_contract_info
         <trim prefix="SET" suffixOverrides=",">
             <if test="contractId != null and contractId != ''">contract_id = #{contractId},</if>

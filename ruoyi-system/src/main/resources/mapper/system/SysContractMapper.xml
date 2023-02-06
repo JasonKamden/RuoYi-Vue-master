@@ -4,7 +4,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.system.mapper.SysContractMapper">
     
-    <resultMap type="SysContract" id="SysContractResult">
+    <resultMap type="com.ruoyi.system.domain.SysContract" id="SysContractResult">
         <result property="contractId"    column="contract_id"    />
         <result property="title"    column="title"    />
         <result property="contractCode"    column="contract_code"    />
@@ -27,7 +27,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         select contract_id, title, contract_code, contract_type, start_time, end_time, sign_time, pay_type, cash_type, total, real_total, is_first, sign_addr, status, contenxt, file_attach from sys_contract
     </sql>
 
-    <select id="selectSysContractList" parameterType="SysContract" resultMap="SysContractResult">
+    <select id="selectSysContractList" parameterType="com.ruoyi.system.domain.SysContract" resultMap="SysContractResult">
         <include refid="selectSysContractVo"/>
         <where>  
             <if test="title != null  and title != ''"> and title = #{title}</if>
@@ -53,7 +53,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where contract_id = #{contractId}
     </select>
         
-    <insert id="insertSysContract" parameterType="SysContract">
+    <insert id="insertSysContract" parameterType="com.ruoyi.system.domain.SysContract">
         insert into sys_contract
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="contractId != null">contract_id,</if>
@@ -93,7 +93,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          </trim>
     </insert>
 
-    <update id="updateSysContract" parameterType="SysContract">
+    <update id="updateSysContract" parameterType="com.ruoyi.system.domain.SysContract">
         update sys_contract
         <trim prefix="SET" suffixOverrides=",">
             <if test="title != null">title = #{title},</if>

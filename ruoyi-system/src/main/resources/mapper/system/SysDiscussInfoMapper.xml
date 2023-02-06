@@ -4,7 +4,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.system.mapper.SysDiscussInfoMapper">
     
-    <resultMap type="SysDiscussInfo" id="SysDiscussInfoResult">
+    <resultMap type="com.ruoyi.system.domain.SysDiscussInfo" id="SysDiscussInfoResult">
         <result property="recordId"    column="record_id"    />
         <result property="title"    column="title"    />
         <result property="sortNo"    column="sort_no"    />
@@ -25,7 +25,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         select record_id, title, sort_no, discuss_type, user_id, open_users, open_depts, open_roles, status, create_by, create_time, update_by, update_time, remark from sys_discuss_info
     </sql>
 
-    <select id="selectSysDiscussInfoList" parameterType="SysDiscussInfo" resultMap="SysDiscussInfoResult">
+    <select id="selectSysDiscussInfoList" parameterType="com.ruoyi.system.domain.SysDiscussInfo" resultMap="SysDiscussInfoResult">
         <include refid="selectSysDiscussInfoVo"/>
         <where>  
             <if test="title != null  and title != ''"> and title = #{title}</if>
@@ -44,7 +44,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where record_id = #{recordId}
     </select>
         
-    <insert id="insertSysDiscussInfo" parameterType="SysDiscussInfo">
+    <insert id="insertSysDiscussInfo" parameterType="com.ruoyi.system.domain.SysDiscussInfo">
         insert into sys_discuss_info
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="recordId != null">record_id,</if>
@@ -80,7 +80,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          </trim>
     </insert>
 
-    <update id="updateSysDiscussInfo" parameterType="SysDiscussInfo">
+    <update id="updateSysDiscussInfo" parameterType="com.ruoyi.system.domain.SysDiscussInfo">
         update sys_discuss_info
         <trim prefix="SET" suffixOverrides=",">
             <if test="title != null">title = #{title},</if>
