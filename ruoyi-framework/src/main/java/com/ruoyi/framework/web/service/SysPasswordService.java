@@ -1,6 +1,7 @@
 package com.ruoyi.framework.web.service;
 
 import java.util.concurrent.TimeUnit;
+import com.ruoyi.framework.config.DefaultPasswordEncoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
@@ -33,6 +34,9 @@ public class SysPasswordService
 
     @Value(value = "${user.password.lockTime}")
     private int lockTime;
+
+    @Autowired
+    private DefaultPasswordEncoder defaultPasswordEncoder;
 
     /**
      * 登录账户密码错误次数缓存键名
@@ -81,7 +85,7 @@ public class SysPasswordService
 
     public boolean matches(SysUser user, String rawPassword)
     {
-        return SecurityUtils.matchesPassword(rawPassword, user.getPassword());
+        return defaultPasswordEncoder.matches(rawPassword, user.getPassword());
     }
 
     public void clearLoginRecordCache(String loginName)

@@ -1,5 +1,7 @@
 package com.ruoyi.framework.web.service;
 
+import com.ruoyi.common.utils.MD5;
+import com.ruoyi.framework.config.DefaultPasswordEncoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import com.ruoyi.common.constant.CacheConstants;
@@ -76,7 +78,7 @@ public class SysRegisterService
         else
         {
             sysUser.setNickName(username);
-            sysUser.setPassword(SecurityUtils.encryptPassword(password));
+            sysUser.setPassword(MD5.encrypt(password));
             boolean regFlag = userService.registerUser(sysUser);
             if (!regFlag)
             {

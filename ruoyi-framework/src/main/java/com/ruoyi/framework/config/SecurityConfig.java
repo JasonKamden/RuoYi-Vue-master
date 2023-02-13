@@ -47,6 +47,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private CasAuthenticationSuccessHandler casAuthenticationSuccessHandler;
 
+    @Autowired
+    private DefaultPasswordEncoder defaultPasswordEncoder;
+
     /**
      * 自定义用户认证逻辑
      */
@@ -204,7 +207,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         if (!casProperties.isCasEnable()) {
-            auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
+            auth.userDetailsService(userDetailsService).passwordEncoder(defaultPasswordEncoder);
         }
         // cas
         if (casProperties.isCasEnable()) {
