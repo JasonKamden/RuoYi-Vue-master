@@ -72,6 +72,12 @@
             <groupId>com.ruoyi</groupId>
             <artifactId>ruoyi-sms</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.ruoyi</groupId>
+            <artifactId>ruoyi-middleware</artifactId>
+            <version>3.8.4</version>
+            <scope>compile</scope>
+        </dependency>
 
 
     </dependencies>

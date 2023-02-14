@@ -39,6 +39,8 @@
         <!-- SMS 配置 -->
         <aliyun.sms.version>2.0.22</aliyun.sms.version>
         <tencent.sms.version>3.1.635</tencent.sms.version>
+        <!--minio配置-->
+        <minio.version>8.2.1</minio.version>
     </properties>
 	
     <!-- 依赖声明 -->
@@ -185,6 +187,13 @@
                 <groupId>com.tencentcloudapi</groupId>
                 <artifactId>tencentcloud-sdk-java-sms</artifactId>
                 <version>${tencent.sms.version}</version>
+            </dependency>
+
+            <!-- Minio 文件存储 -->
+            <dependency>
+                <groupId>io.minio</groupId>
+                <artifactId>minio</artifactId>
+                <version>${minio.version}</version>
             </dependency>
 
             <dependency>
