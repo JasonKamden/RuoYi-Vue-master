@@ -248,6 +248,7 @@
         <module>ruoyi-system</module>
         <module>ruoyi-quartz</module>
         <module>ruoyi-generator</module>
+        <module>ruoyi-middleware</module>
         <module>ruoyi-common</module>
         <module>ruoyi-sms</module>
     </modules>
